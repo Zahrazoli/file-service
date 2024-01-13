@@ -1,0 +1,54 @@
+.wrapper
+    .sidebar(data-color="white", data-active-color="danger")
+        .logo
+            div.row.justify-content-center
+                a(href="user.html", class="simple-text logo-mini")
+                    .logo-image-small
+                        img.circle(src="/img/default-avatar.png", alt="آواتار")
+            div.row.justify-content-center
+                a(href="#", class="simple-text logo-normal")
+                    | #{!user.firstName || !user.lastName  ? user.email  : user.firstName + " " + user.lastName}
+        .sidebar-wrapper
+            ul.nav#sidebarItems
+                li#dashboard
+                    a(href="/v1.0/dashboard")
+                        i.fa.fa-home
+                        p
+                            | داشبورد
+                li#profile
+                    a(href="/v1.0/user/profile")
+                        i.fa.fa-user
+                        p
+                            | پروفایل کاربری
+                li#files
+                    a(href="/v1.0/files")
+                        i.fa.fa-list
+                        p
+                            | فایل ها
+                li#plans
+                    a(href="/v1.0/plans")
+                        i.fa.fa-dollar
+                        p
+                            | اشتراک ها
+                li#logout
+                    a(href="/v1.0/user/logout")
+                        i.fa.fa-sign-out
+                        p
+                            | خروج
+    .main-panel
+        //- Navbar
+        nav.navbar.navbar-expand-lg.navbar-absolute.fixed-top.navbar-transparent
+            .container-fluid
+                .navbar-wrapper
+                    .navbar-toggle
+                        button.navbar-toggler(type="button")
+                            span.navbar-toggler-bar.bar1
+                            span.navbar-toggler-bar.bar2
+                            span.navbar-toggler-bar.bar3
+                    a.navbar-brand(href="javascript:;")
+                        | پنل کاربری
+                button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navigation", aria-controls="navigation-index", aria-expanded="false", aria-label="Toggle navigation")
+                    span.navbar-toggler-bar.navbar-kebab
+                    span.navbar-toggler-bar.navbar-kebab
+                    span.navbar-toggler-bar.navbar-kebab
+        block content

@@ -1,0 +1,163 @@
+extends ./partials/layout
+block content
+    .content
+        .row
+            .col-md-5
+                .card.card-user
+                    .image
+                        img(src="/img/default-banner.jpg", alt="...")
+                    .card-body
+                        .author
+                            a(href="#")
+                                img.avatar.border-gray(src="/img/default-avatar.png", alt="")
+                                h5.title
+                                    | #{!user.firstName || !user.lastName  ? "کاربر بی نام و نشون :؟"  : user.firstName + " " + user.lastName}
+                            p.description
+                                | #{user.username ? `@${user.username}` : user.email}
+                        p.description.text-center
+                            | #{user.description || "یه کاربر که توضیحاتی از خودش به ما نداده :)"}
+                    .card-footer
+                        hr
+                        .button-container
+                            .row
+                                .col-lg-3.col-md-6.col-6.ml-auto
+                                    h5
+                                        | فایل‌ها
+                                        br
+                                        br
+                                        p
+                                            | #{filesCount}
+                                .col-lg-4.col-md-6.col-6.ml-auto.mr-auto
+                                    h5
+                                        | مجموع فضا
+                                        br
+                                        br
+                                        p
+                                            | #{totalStorage.value} #{totalStorage.unit}
+
+                                .col-lg-3.mr-auto
+                                    h5
+                                        | استفاده شده
+                                        br
+                                        br
+                                        p
+                                            | #{usedStorage.value} #{usedStorage.unit}
+
+            .col-md-7
+                .card.card-user.text-right
+                    .card-header
+                        h5.card-title
+                            | ویرایش پروفایل
+                    .card-body
+                        if errors
+                            .alert.alert-danger(role="alert")
+                                each message in errors
+                                    span(aria-hidden="true") • #{message}
+                                    br
+                        form( action="/v1.0/user/update"  method="POST")
+                            br
+                            .row
+                                .col-md-6.pr-1
+                                    .form-group
+                                        label(for="email")
+                                            | آدرس ایمیل
+                                        input#email.form-control(name="email" type="email", placeholder="آدرس ایمیل",value=user.email, readonly)
+                                .col-md-6.pl-1
+                                    .form-group
+                                        label(for="username")
+                                            | نام کاربری
+                                        input#username.form-control(name="username" type="text", placeholder="نام کاربری", value=data ? data.username : user.username)
+                            br
+                            .row
+                                .col-md-6.pr-1
+                                    .form-group
+                                        label(for="firstName")
+                                            | نام
+                                        input#firstName.form-control(name="firstName" type="text", placeholder="نام", value=data ? data.firstName : user.firstName)
+                                .col-md-6.pl-1
+                                    .form-group
+                                        label(for="lastName")
+                                            | نام خانوادگی
+                                        input#lastName.form-control(name="lastName" type="text", placeholder="نام خانوادگی", value=data ? data.lastName : user.lastName)
+                            br
+                            .row
+                                .col-md-12
+                                    .form-group
+                                        label(for="email")
+                                            | درباره من
+                                        textarea.form-control.textarea(name="description", placeholder="", rows="5")
+                                            | #{data ? data.description : user.description}
+                            br
+                            .row
+                                .update.ml-auto.mr-auto
+                                    button.btn.btn-primary.btn-round(type="submit")
+                                        | به‌روزرسانی پروفایل
+        if user.isAdmin
+            .row
+                .col-md-12
+                    .content.text-right
+                        | دسترسی مدیریتی :
+                    .card.card-user.text-right
+                        .card-header
+                            h5.card-title
+                                | ایجاد کاربر
+                        .card-body
+                            if createUserErrors
+                                .alert.alert-danger(role="alert")
+                                    each message in errors
+                                        span(aria-hidden="true") • #{message}
+                                        br
+                            form( action="/v1.0/user/create"  method="POST")
+                                .row
+                                    .col-md-6.pr-1
+                                        .form-group
+                                            label(for="email")
+                                                | آدرس ایمیل
+                                            input#email.form-control(name="email" type="email", placeholder="آدرس ایمیل",value=data ? data.email : "")
+                                    .col-md-6.pl-1
+                                        .form-group
+                                            label(for="username")
+                                                | نام کاربری
+                                            input#username.form-control(name="username" type="text", placeholder="نام کاربری", value=data ? data.username : "")
+                                .row
+                                    .col-md-6.pr-1
+                                        .form-group
+                                            label(for="firstName")
+                                                | نام
+                                            input#firstName.form-control(name="firstName" type="text", placeholder="نام", value=data ? data.firstName : "")
+                                    .col-md-6.pl-1
+                                        .form-group
+                                            label(for="lastName")
+                                                | نام خانوادگی
+                                            input#lastName.form-control(name="lastName" type="text", placeholder="نام خانوادگی", value=data ? data.lastName : "")
+                                .row
+                                    .col-md-6.pr-1
+                                        .form-group
+                                            label(for="password")
+                                                | رمزعبور
+                                            input#password.form-control(name="password" type="password", placeholder="رمزعبور", value=data ? data.password : "")
+                                    .col-md-6.pl-1
+                                        .form-group
+                                            label(for="confirmPassword")
+                                                | تایید رمزعبور
+                                            input#confirmPassword.form-control(name="confirmPassword" type="password", placeholder="تایید رمزعبور", value=data ? data.confirmPassword : "")
+                                .row
+                                    .col-md-6.pr-1
+                                        .form-group
+                                            label(for="isAdmin")
+                                                | دسترسی ادمین
+                                            select#isAdmin.form-control(name="isAdmin" type="text")
+                                                option(value="0" selected= data && data.isAdmin == "0") خیر
+                                                option(value="1" selected= data && data.isAdmin == "1") بله
+
+                                .row
+                                    .col-md-12
+                                        .form-group
+                                            label(for="email")
+                                                | درباره من
+                                            textarea.form-control.textarea(name="description", placeholder="", rows="5")
+                                                | #{data ? data.description : ""}
+                                .row
+                                    .update.ml-auto.mr-auto
+                                        button.btn.btn-primary.btn-round(type="submit")
+                                            | ذخیره

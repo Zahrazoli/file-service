@@ -1,0 +1,111 @@
+:root {
+    --primary-main: #fdfff5;
+    --text-primary: #000000;
+    --text-secondary: #7b7b7b;
+}
+@font-face {
+    font-family: Vazir;
+    src: url('../fonts/eot/Vazir.eot');
+    src: url('../fonts/eot/Vazir.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/woff2/Vazir.woff2') format('woff2'),
+    url('../fonts/woff/Vazir.woff') format('woff'),
+    url('../fonts/ttf/Vazir.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('../fonts/eot/Vazir-Bold.eot');
+    src: url('../fonts/eot/Vazir-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/woff2/Vazir-Bold.woff2') format('woff2'),
+    url('../fonts/woff/Vazir-Bold.woff') format('woff'),
+    url('../fonts/ttf/Vazir-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('../fonts/eot/Vazir-Light.eot');
+    src: url('../fonts/eot/Vazir-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/woff2/Vazir-Light.woff2') format('woff2'),
+    url('../fonts/woff/Vazir-Light.woff') format('woff'),
+    url('../fonts/ttf/Vazir-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('../fonts/eot/Vazir-Medium.eot');
+    src: url('../fonts/eot/Vazir-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/woff2/Vazir-Medium.woff2') format('woff2'),
+    url('../fonts/woff/Vazir-Medium.woff') format('woff'),
+    url('../fonts/ttf/Vazir-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('../fonts/eot/Vazir-Thin.eot');
+    src: url('../fonts/eot/Vazir-Thin.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/woff2/Vazir-Thin.woff2') format('woff2'),
+    url('../fonts/woff/Vazir-Thin.woff') format('woff'),
+    url('../fonts/ttf/Vazir-Thin.ttf') format('truetype');
+    font-weight: 100;
+}
+
+
+
+.rtl{
+    direction: rtl;
+}
+
+
+body {
+    font-family:  Vazir, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.471;
+    background-color: var(--primary-main);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    text-align: center;
+}
+
+.logo {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.transaction-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.btn-primary {
+    margin-top: 20px;
+}
+
+.alert-success-custom {
+    background-color: #7de45e;
+    font-size: medium;
+    border-radius: 10px;
+}
+
+.alert-danger-custom {
+    background-color: #fa113c83;
+    font-size: medium;
+    border-radius: 10px;
+}
+
+.custom-shadow {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}

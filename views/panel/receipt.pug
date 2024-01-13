@@ -1,0 +1,41 @@
+html
+    head
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        // Meta, title, CSS, favicons, etc.
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(name='fontiran.com:license', content='Y68A9')
+        link(rel='icon', href='../../images/favicon.ico', type='image/ico')
+        title رسید پرداخت
+        // Bootstrap
+        link(href='../../css/bootstrap.min.css' rel='stylesheet')
+        link(href='../../css/payment.css' rel='stylesheet')
+
+    body
+        .container
+            h3 آپلودر
+
+            //- Use conditional statements to set the alert color based on the status
+            if status === "CONFIRM"
+                .alert.alert-success.alert-success-custom.custom-shadow.mt-4
+                    p.rtl
+                        | پرداخت با موفقیت انجام شد.
+            else if errors
+                .alert.alert-danger.alert-danger-custom.custom-shadow.mt-4
+                    each message in errors
+                        span(aria-hidden="true") • #{message}
+                        br
+            else
+                .alert.alert-warning.mt-4.custom-shadow
+                    p.rtl
+                        | نامشخص
+
+
+            .transaction-box.custom-shadow
+                h2 جزئیات تراکنش
+                p سفارش: #{name}
+                p قیمت: #{price.toLocaleString()}
+                p شناسه سفارش: #{RRN}
+                p زمان پرداخت: #{paymentDate}
+                a.btn.btn-primary(href="/v1.0/dashboard") بازگشت به برنامه

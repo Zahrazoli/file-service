@@ -1,0 +1,109 @@
+footer.footer.footer-black.footer-white
+    .container-fluid
+        .row
+
+//- Core JS Files
+script(src="/js/jquery.min.js")
+script(src="/js/popper.min.js")
+script(src="/js/bootstrap.min.js")
+script(src="/js/perfect-scrollbar.jquery.min.js")
+
+//- Chart JS
+script(src="/js/chartjs.min.js")
+
+//- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc
+script(src="/js/paper-dashboard.min.js?v=2.0.1", type="text/javascript")
+//- Paper Dashboard DEMO methods, don't include it in your project!
+script(src="/js/demo.js")
+
+//    datatables
+script(src="/js/datatables.min.js")
+
+script.
+
+    const sidebarItems = document.getElementById("sidebarItems");
+    // Set active item in sidebar by localStorage
+    const activeItem = localStorage.getItem('activeItem');
+    if (activeItem) {
+        const activeItemElement = document.getElementById(activeItem);
+        if (activeItemElement) {
+            activeItemElement.classList.add('active');
+        }
+    }
+
+    // Set active item in sidebar by click
+    sidebarItems.addEventListener('click', (event) => {
+        const activeItem = localStorage.getItem('activeItem');
+        if (activeItem) {
+            const activeItemElement = document.getElementById(activeItem);
+            if (activeItemElement) {
+                activeItemElement.classList.remove('active');
+            }
+        }
+        localStorage.setItem('activeItem', event.target.parentElement.parentElement.id);
+        event.target.parentElement.parentElement.classList.add('active');
+    });
+script.
+    $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
+        return {
+            iStart: oSettings._iDisplayStart,
+            iEnd: oSettings.fnDisplayEnd(),
+            iLength: oSettings._iDisplayLength,
+            iTotal: oSettings.fnRecordsTotal(),
+            iFilteredTotal: oSettings.fnRecordsDisplay(),
+            iPage: Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+            iTotalPages: Math.ceil(
+                oSettings.fnRecordsDisplay() / oSettings._iDisplayLength
+            ),
+        };
+    };
+    $.fn.dataTable.ext.errMode = 'throw';
+    let table = new DataTable('#dataTable', {
+        processing: true,
+        serverSide: true,
+        columnDefs: [
+            {
+                targets: "_all",
+                className: 'dt-body-right'
+            },
+            {
+                targets: "_all",
+                className: 'dt-head-right'
+            },
+            { defaultContent: "-", targets: "_all" }
+        ],
+        searching : false,
+        ordering:false,
+        ajax : {
+            url : window.location.pathname.split("/").pop(-1) +
+                "/list?" +
+                window.location.href.split("?")[1],
+            dataSrc : "data"
+        },
+        language: {
+            "decimal": "",
+            "emptyTable": "هیچ داده ای در جدول موجود نیست",
+            "info": "نمایش صفحه _PAGE_ از _PAGES_",
+            "infoEmpty": "نمایش 0 تا 0 از 0 رکورد",
+            "infoFiltered": "(فیلتر شده از _MAX_ رکورد)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "نمایش _MENU_ رکورد در هر صفحه",
+            "loadingRecords": "در حال بارگذاری...",
+            "processing": "در حال پردازش...",
+            "search": "جستجو: ",
+            "zeroRecords": "متاسفانه رکوردی یافت نشد",
+            "paginate": {
+                "first": "اولین",
+                "last": "آخرین",
+                "next": "بعدی",
+                "previous": "قبلی"
+            },
+            "aria": {
+                "sortAscending": ": مرتب سازی صعودی ستون را فعال کنید",
+                "sortDescending": ": مرتب سازی نزولی ستون را فعال کنید"
+            }
+        }
+
+    });
+block scripts

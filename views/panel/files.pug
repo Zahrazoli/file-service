@@ -1,0 +1,39 @@
+extends ./partials/layout
+
+block content
+    .content
+        .row
+            .col-md-12.text-right
+                if errors
+                    .alert.alert-danger(role="alert")
+                        each message in errors
+                            span(aria-hidden="true") • #{message}
+                            br
+                .card.card-user.text-right
+                    .card-header
+                        h5.card-title آپلود فایل
+                    .card-body
+                        form(action="" , method="POST" enctype="multipart/form-data")
+                            .row
+                                .col-md-12.pl-1
+                                    .form-group
+                                        label(for='file') فایل
+                                        input.form-control#file(name='file', type='file')
+                            .update.ml-auto.mr-auto.text-center
+                                button.btn.btn-primary(type='submit') ارسال فایل
+
+            .col-md-12.text-right
+                .card
+                    .card-header
+                        h4.card-title فایل های شما
+                    .card-body
+                        .table-responsive
+                            table#dataTable.table
+                                thead.text-primary
+                                    th نام
+                                    th حجم
+                                    th تعداد دانلود
+                                    th تاریخ
+                                    th لینک دانلود
+                                    th دانلود
+                                    th حذف

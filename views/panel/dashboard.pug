@@ -1,0 +1,79 @@
+extends ./partials/layout
+
+block content
+    .content
+        .row
+            .col-lg-4.col-md-6.col-sm-6
+                .card.card-stats
+                    .card-body
+                        .row
+                            .col-5.col-md-4
+                                .icon-big.text-center.icon-warning
+                                    i.fa.fa-hdd-o.text-warning
+                            .col-7.col-md-8
+                                .numbers
+                                    p.card-category
+                                        | ظرفیت
+                                    p.card-title
+                                        | #{totalStorage.value} #{totalStorage.unit}
+                    .card-footer
+                        .stats.text-right
+
+
+            .col-lg-4.col-md-6.col-sm-6
+                .card.card-stats
+                    .card-body
+                        .row
+                            .col-5.col-md-4
+                                .icon-big.text-center.icon-warning
+                                    i.fa.fa-file.text-success
+                            .col-7.col-md-8
+                                .numbers
+                                    p.card-category
+                                        | تعداد فایل ها
+                                    p.card-title
+                                        | #{filesCount}
+                    .card-footer
+                        .stats.text-right
+                            |
+
+
+            .col-lg-4.col-md-6.col-sm-6
+                .card.card-stats
+                    .card-body
+                        .row
+                            .col-5.col-md-4
+                                .icon-big.text-center.icon-warning
+                                    i.fa.fa-percent.text-danger
+                            .col-7.col-md-8
+                                .numbers
+                                    p.card-category
+                                        | فضای مصرف شده
+                                    p.card-title
+                                        | #{usedStorage.value} #{usedStorage.unit}
+                    .card-footer
+                        .stats.text-right
+
+
+
+        .row
+            .col-md-12
+                .card.text-right
+                    .card-header
+                        h5.card-title
+                            | گزارش کلی
+                    .card-body.text-center
+                        canvas#chartEmail
+                    .card-footer
+                        hr
+                        .stats
+                            | تعداد فایل ها : #{filesCount}
+
+
+
+block scripts
+    script.
+        $(document).ready(function () {
+            // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+            demo.initChartsPages(#{totalStorage.value} , #{usedStorage.value});
+        });

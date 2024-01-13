@@ -1,0 +1,70 @@
+extends ./partials/layout
+
+block content
+    .content
+        .row
+            if user.isAdmin
+                .col-md-12.text-right
+                    .content.text-right
+                        | دسترسی مدیریتی :
+                    .card.card-user.text-right
+                        .card-header
+                            h5.card-title ایجاد اشتراک
+                        .card-body
+                            if errors
+                                .alert.alert-danger(role="alert")
+                                    each message in errors
+                                        span(aria-hidden="true") • #{message}
+                                        br
+                            form(action="" method="POST")
+                                .row
+                                    .col-md-6.pr-1
+                                        .form-group
+                                            label(for='name') نام اشتراک:
+                                            input#name(name='name', type='text', class='form-control' value=data && data.name ? data.name:"" )
+                                    .col-md-6.pr-1
+                                        .form-group
+                                            label(for='size')  حجم بر حسب بایت:
+                                            input#size(name='size', type='number', class='form-control' min=0 value=data && data.size ? data.size:"")
+                                    .col-md-6.pr-1
+                                        .form-group
+                                            label(for='duration')  زمان بر حسب روز:
+                                            input#name(name='duration', type='number', class='form-control' min=0 value=data && data.duration ? data.duration:"")
+
+                                    .col-md-6.pr-1
+                                        .form-group
+                                            label(for='price')  قیمت بر حسب ریال:
+                                            input#name(name='price', type='number', class='form-control' min=0 value=data && data.price ? data.price : "")
+                                    .col-md-6.pr-1
+                                        .form-group
+                                            label(for='type') نوع
+                                            select#name(name='type', type='text', class='form-control')
+                                                option(value="STARTER" selected = data && data.type == "STARTER" ) استارتر
+                                                option(value="FREE" selected = data && data.type == "FREE") رایگان
+                                                option(value="SALEABLE" selected = data && data.type == "SALEABLE") پولی
+                                .update.ml-auto.mr-auto.text-center
+                                    button.btn.btn-primary(type='submit') ذخیره
+
+
+            .col-md-12.text-right
+                .card
+                    .card-header
+                        h4.card-title اشتراک ها
+                        if orderErrors
+                            .alert.alert-danger(role="alert")
+                                each message in errors
+                                    span(aria-hidden="true") • #{message}
+                                    br
+                    .card-body
+                        .table-responsive
+                            table#dataTable.table
+                                thead.text-primary
+                                    th نام
+                                    th حجم
+                                    th مدت
+                                    th مبلغ
+                                    th خرید
+                                    if user.isAdmin
+                                        th عملیات
+
+
